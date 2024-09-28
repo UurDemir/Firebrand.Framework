@@ -262,12 +262,11 @@ public static class StringExtensions
                 builder.Append(sentence[indexOfFirstLetter]);
                 indexOfFirstLetter++;
             }
-            
+
             builder.Append(char.ToUpper(sentence[indexOfFirstLetter]));
             builder.Append(sentence[(indexOfFirstLetter+1)..].ToLower());
             builder.Append(str[index++]);
         }
         return builder.ToString().Trim();
     }
-
 }

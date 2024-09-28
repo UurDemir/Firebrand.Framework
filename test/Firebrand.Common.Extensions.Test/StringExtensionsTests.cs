@@ -1,4 +1,4 @@
-namespace Firebrand.Common.Extensions.Tests;
+namespace Firebrand.Common.Extensions.Test;
 
 [TestFixture]
 public class StringExtensionsTests
@@ -7,10 +7,10 @@ public class StringExtensionsTests
     public void FormatWith_ReturnsFormattedString()
     {
         // Arrange
-        string text = "The {0} is {1} years old.";
-        int age = 25;
-        string name = "person";
-        string expected = "The person is 25 years old.";
+        const string text = "The {0} is {1} years old.";
+        const int age = 25;
+        const string name = "person";
+        const string expected = "The person is 25 years old.";
 
         // Act
         string actual = text.FormatWith(name, age);
@@ -23,19 +23,18 @@ public class StringExtensionsTests
     public void IsNullOrWhiteSpaceOrEmpty_ReturnsTrue_WhenStringIsNullOrWhiteSpace()
     {
         // Arrange
-        string? nullString = null;
+        const string? nullString = null;
         string emptyString = string.Empty;
-        string whitespaceString = "    ";
+        const string whitespaceString = "    ";
 
         // Act
-#pragma warning disable CS8604 // Possible null reference argument.
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
         bool nullResult = nullString.IsNullOrWhiteSpaceOrEmpty();
-#pragma warning restore CS8604 // Possible null reference argument.
+#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
         bool emptyResult = emptyString.IsNullOrWhiteSpaceOrEmpty();
         bool whitespaceResult = whitespaceString.IsNullOrWhiteSpaceOrEmpty();
         Assert.Multiple(() =>
         {
-
             // Assert
             Assert.That(nullResult);
             Assert.That(emptyResult);
@@ -47,7 +46,7 @@ public class StringExtensionsTests
     public void IsNullOrWhiteSpaceOrEmpty_ReturnsFalse_WhenStringIsNotEmptyAndNotWhiteSpace()
     {
         // Arrange
-        string nonEmptyString = "Hello, world!";
+        const string nonEmptyString = "Hello, world!";
 
         // Act
         bool result = nonEmptyString.IsNullOrWhiteSpaceOrEmpty();
@@ -60,7 +59,7 @@ public class StringExtensionsTests
     public void Truncate_ReturnsOriginalString_WhenLengthIsGreaterThanStringLength()
     {
         // Arrange
-        string str = "The quick brown fox jumps over the lazy dog.";
+        const string str = "The quick brown fox jumps over the lazy dog.";
         int length = str.Length;
 
         // Act
@@ -74,10 +73,10 @@ public class StringExtensionsTests
     public void Truncate_ReturnsTruncatedString_WhenLengthIsLessThanStringLength()
     {
         // Arrange
-        string str = "The quick brown fox jumps over the lazy dog.";
-        int length = 10;
-        string ellipsis = "...";
-        string expected = "The quick...";
+        const string str = "The quick brown fox jumps over the lazy dog.";
+        const int length = 10;
+        const string ellipsis = "...";
+        const string expected = "The quick...";
 
         // Act
         string actual = str.Truncate(length, ellipsis);
@@ -90,8 +89,8 @@ public class StringExtensionsTests
     public void ToTitleCase_ReturnsTitleCasedString()
     {
         // Arrange
-        string str = "the quick brown fox";
-        string expected = "The Quick Brown Fox";
+        const string str = "the quick brown fox";
+        const string expected = "The Quick Brown Fox";
 
         // Act
         string actual = str.ToTitleCase();
@@ -104,8 +103,8 @@ public class StringExtensionsTests
     public void ContainsAny_ReturnsTrue_WhenStringContainsAnyOfSpecifiedCharacters()
     {
         // Arrange
-        string str = "The quick brown fox jumps over the lazy dog.";
-        char[] chars = { 'a', 'e', 'i', 'o', 'u' };
+        const string str = "The quick brown fox jumps over the lazy dog.";
+        char[] chars = ['a', 'e', 'i', 'o', 'u'];
 
         // Act
         bool result = str.ContainsAny(chars);
@@ -118,8 +117,8 @@ public class StringExtensionsTests
     public void ContainsAny_ReturnsFalse_WhenStringDoesNotContainAnyOfSpecifiedCharacters()
     {
         // Arrange
-        string str = "The quick brown fox jumps over the lazy dog.";
-        char[] chars = { 'ü', 'ö', 'ç' };
+        const string str = "The quick brown fox jumps over the lazy dog.";
+        char[] chars = ['ü', 'ö', 'ç'];
 
         // Act
         bool result = str.ContainsAny(chars);
@@ -131,8 +130,8 @@ public class StringExtensionsTests
     public void ContainsAny_WhenStringContainsAnyOfTheGivenCharacters_ReturnsTrue()
     {
         // Arrange
-        string str = "hello world";
-        char[] chars = { 'l', 'o' };
+        const string str = "hello world";
+        char[] chars = ['l', 'o'];
 
         // Act
         bool result = str.ContainsAny(chars);
@@ -145,8 +144,8 @@ public class StringExtensionsTests
     public void ContainsAny_WhenStringDoesNotContainAnyOfTheGivenCharacters_ReturnsFalse()
     {
         // Arrange
-        string str = "hello world";
-        char[] chars = { 'x', 'y', 'z' };
+        const string str = "hello world";
+        char[] chars = ['x', 'y', 'z'];
 
         // Act
         bool result = str.ContainsAny(chars);
@@ -159,7 +158,7 @@ public class StringExtensionsTests
     public void RemoveWhitespace_RemovesAllWhiteSpaceCharactersFromString()
     {
         // Arrange
-        string str = " hello\tworld\n ";
+        const string str = " hello\tworld\n ";
 
         // Act
         string result = str.RemoveWhitespace();
@@ -172,7 +171,7 @@ public class StringExtensionsTests
     public void IsNumeric_WhenStringContainsOnlyNumericCharacters_ReturnsTrue()
     {
         // Arrange
-        string str = "12345";
+        const string str = "12345";
 
         // Act
         bool result = str.IsNumeric();
@@ -185,7 +184,7 @@ public class StringExtensionsTests
     public void IsNumeric_WhenStringContainsNonNumericCharacters_ReturnsFalse()
     {
         // Arrange
-        string str = "12345a";
+        const string str = "12345a";
 
         // Act
         bool result = str.IsNumeric();
@@ -198,8 +197,8 @@ public class StringExtensionsTests
     public void Left_ReturnsTheSpecifiedNumberOfCharactersFromTheBeginningOfTheString()
     {
         // Arrange
-        string str = "hello world";
-        int length = 5;
+        const string str = "hello world";
+        const int length = 5;
 
         // Act
         string result = str.Left(length);
@@ -212,8 +211,8 @@ public class StringExtensionsTests
     public void Left_ReturnsTheEntireStringIfTheSpecifiedLengthIsGreaterThanTheStringLength()
     {
         // Arrange
-        string str = "hello world";
-        int length = 20;
+        const string str = "hello world";
+        const int length = 20;
 
         // Act
         string result = str.Left(length);
@@ -226,8 +225,8 @@ public class StringExtensionsTests
     public void Right_ReturnsTheSpecifiedNumberOfCharactersFromTheEndOfTheString()
     {
         // Arrange
-        string str = "hello world";
-        int length = 5;
+        const string str = "hello world";
+        const int length = 5;
 
         // Act
         string result = str.Right(length);
@@ -240,8 +239,8 @@ public class StringExtensionsTests
     public void Right_ReturnsTheEntireStringIfTheSpecifiedLengthIsGreaterThanTheStringLength()
     {
         // Arrange
-        string str = "hello world";
-        int length = 20;
+        const string str = "hello world";
+        const int length = 20;
 
         // Act
         string result = str.Right(length);
@@ -252,9 +251,9 @@ public class StringExtensionsTests
     [Test]
     public void RemoveFromEnd_RemovesSpecifiedNumberOfCharactersFromEndOfString()
     {
-        string input = "abcdefg";
-        string expectedOutput = "abcd";
-        int count = 3;
+        const string input = "abcdefg";
+        const string expectedOutput = "abcd";
+        const int count = 3;
 
         string actualOutput = input.RemoveFromEnd(count);
 
@@ -264,8 +263,8 @@ public class StringExtensionsTests
     [Test]
     public void RemoveFromEnd_ReturnsEmptyStringIfCountIsEqualToStringLength()
     {
-        string input = "abcdefg";
-        int count = 7;
+        const string input = "abcdefg";
+        const int count = 7;
 
         string actualOutput = input.RemoveFromEnd(count);
 
@@ -275,8 +274,8 @@ public class StringExtensionsTests
     [Test]
     public void ContainsIgnoreCase_ReturnsTrueIfStringContainsSubstringIgnoringCase()
     {
-        string input = "The quick brown fox jumps over the lazy dog.";
-        string substring = "brown fox";
+        const string input = "The quick brown fox jumps over the lazy dog.";
+        const string substring = "brown fox";
 
         bool actualOutput = input.ContainsIgnoreCase(substring);
 
@@ -286,8 +285,8 @@ public class StringExtensionsTests
     [Test]
     public void ContainsIgnoreCase_ReturnsFalseIfStringDoesNotContainSubstringIgnoringCase()
     {
-        string input = "The quick brown fox jumps over the lazy dog.";
-        string substring = "orange cat";
+        const string input = "The quick brown fox jumps over the lazy dog.";
+        const string substring = "orange cat";
 
         bool actualOutput = input.ContainsIgnoreCase(substring);
 
@@ -297,8 +296,8 @@ public class StringExtensionsTests
     [Test]
     public void ToSnakeCase_ConvertsStringToSnakeCase()
     {
-        string input = "SomeVariableName";
-        string expectedOutput = "some_variable_name";
+        const string input = "SomeVariableName";
+        const string expectedOutput = "some_variable_name";
 
         string actualOutput = input.ToSnakeCase();
 
@@ -308,8 +307,8 @@ public class StringExtensionsTests
     [Test]
     public void ToKebabCase_ConvertsStringToKebabCase()
     {
-        string input = "SomeOtherVariableName";
-        string expectedOutput = "some-other-variable-name";
+        const string input = "SomeOtherVariableName";
+        const string expectedOutput = "some-other-variable-name";
 
         string actualOutput = input.ToKebabCase();
 
@@ -319,7 +318,7 @@ public class StringExtensionsTests
     [Test]
     public void ToByteArray_ConvertsStringToByteArrayUsingUTF8Encoding()
     {
-        string input = "Hello, world!";
+        const string input = "Hello, world!";
         byte[] expectedOutput = "Hello, world!"u8.ToArray();
 
         byte[] actualOutput = input.ToByteArray();
@@ -330,7 +329,7 @@ public class StringExtensionsTests
     [Test]
     public void FromBase64_ConvertsBase64EncodedStringToByteArray()
     {
-        string input = "SGVsbG8sIHdvcmxkIQ==";
+        const string input = "SGVsbG8sIHdvcmxkIQ==";
         byte[] expectedOutput = "Hello, world!"u8.ToArray();
 
         byte[] actualOutput = input.FromBase64();
@@ -342,7 +341,7 @@ public class StringExtensionsTests
     public void ToBase64_ConvertsByteArrayToBase64EncodedString()
     {
         byte[] input = "Hello, world!"u8.ToArray();
-        string expectedOutput = "SGVsbG8sIHdvcmxkIQ==";
+        const string expectedOutput = "SGVsbG8sIHdvcmxkIQ==";
 
         string actualOutput = input.ToBase64();
 
@@ -353,14 +352,14 @@ public class StringExtensionsTests
     public void ReplaceMany_ReplacesMultipleSubstrings()
     {
         // Arrange
-        var input = "The quick brown fox jumps over the lazy dog.";
+        const string input = "The quick brown fox jumps over the lazy dog.";
         var replacements = new Dictionary<string, string>()
     {
         { "quick", "slow" },
         { "brown", "red" },
         { "lazy", "tired" }
     };
-        var expectedOutput = "The slow red fox jumps over the tired dog.";
+        const string expectedOutput = "The slow red fox jumps over the tired dog.";
 
         // Act
         var actualOutput = input.ReplaceMany(replacements);
@@ -373,7 +372,7 @@ public class StringExtensionsTests
     public void SplitAndTrim_SplitsAndTrimsString()
     {
         // Arrange
-        var input = "  The quick   brown fox   ";
+        const string input = "  The quick   brown fox   ";
         var separators = new char[] { ' ' };
         var expectedOutput = new string[] { "The", "quick", "brown", "fox" };
 
@@ -388,8 +387,8 @@ public class StringExtensionsTests
     public void ToSlug_ConvertsStringToSlug()
     {
         // Arrange
-        var input = "The quick brown fox jumped over the lazy dog 123.";
-        var expectedOutput = "the-quick-brown-fox-jumped-over-the-lazy-dog-123";
+        const string input = "The quick brown fox jumped over the lazy dog 123.";
+        const string expectedOutput = "the-quick-brown-fox-jumped-over-the-lazy-dog-123";
 
         // Act
         var actualOutput = input.ToSlug();
@@ -402,8 +401,8 @@ public class StringExtensionsTests
     public void ToProperCase_ConvertsStringToProperCase()
     {
         // Arrange
-        var input = "the quick brown fox. the lazy dog! it ran away? no way.";
-        var expectedOutput = "The quick brown fox. The lazy dog! It ran away? No way.";
+        const string input = "the quick brown fox. the lazy dog! it ran away? no way.";
+        const string expectedOutput = "The quick brown fox. The lazy dog! It ran away? No way.";
 
         // Act
         var actualOutput = input.ToProperCase();

@@ -1,14 +1,20 @@
-﻿namespace Firebrand.Exception;
+﻿
+using System.Diagnostics;
+
+namespace Firebrand.Exception;
 
 /// <summary>
 /// Represents an exception specific to the Firebrand application.
 /// </summary>
+[DebuggerDisplay($"{{{nameof(GetDebuggerDisplay)}(),nq}}")]
 public class FirebrandException : System.Exception
 {
+    public const string UnknownError = "UnknownException";
+
     /// <summary>
     /// Gets the error code associated with this exception.
     /// </summary>
-    public string Code { get; private set; }
+    public string Code { get; }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="FirebrandException"/> class with a specified error code.
@@ -38,5 +44,28 @@ public class FirebrandException : System.Exception
     public FirebrandException(string code, string message, System.Exception innerException) : base(message, innerException)
     {
         this.Code = code;
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="FirebrandException"/> class with the default error code.
+    /// </summary>
+    public FirebrandException() : base()
+    {
+        Code = UnknownError;
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="FirebrandException"/> class with a specified message and inner exception.
+    /// </summary>
+    /// <param name="message">The message that describes the error.</param>
+    /// <param name="innerException">The inner exception that caused this exception to be thrown.</param>
+    public FirebrandException(string? message, System.Exception? innerException) : base(message, innerException)
+    {
+        Code = UnknownError;
+    }
+
+    private string GetDebuggerDisplay()
+    {
+        return $"{Code}-{Message}";
     }
 }

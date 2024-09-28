@@ -6,11 +6,9 @@ namespace Firebrand.Data;
 public abstract class BaseEntityTypeConfiguration<TEntity> : IEntityTypeConfiguration<TEntity>
     where TEntity : BaseEntity
 {
-
     protected BaseEntityTypeConfiguration()
     {
     }
-
 
     public virtual void Configure(EntityTypeBuilder<TEntity> builder)
     {
@@ -26,6 +24,6 @@ public abstract class BaseEntityTypeConfiguration<TEntity> : IEntityTypeConfigur
             tableName = tableName[..^FbDataConstants.FirebrandEntitySuffix.Length];
         return tableName;
     }
-    
+
     protected abstract void ConfigureEntity(EntityTypeBuilder<TEntity> builder);
 }

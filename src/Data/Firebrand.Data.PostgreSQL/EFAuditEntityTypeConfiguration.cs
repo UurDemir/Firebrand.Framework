@@ -9,7 +9,7 @@ public abstract class EFAuditEntityTypeConfiguration<TEntity> : BaseAuditEntityT
     /// <summary>
     /// The default schema name for the entity.
     /// </summary>
-    protected virtual string Schema => "public";
+    protected virtual string Schema => PostgreSqlConstants.Schema;
 
     public sealed override void Configure(EntityTypeBuilder<TEntity> builder)
     {

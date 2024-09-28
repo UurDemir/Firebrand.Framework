@@ -178,7 +178,20 @@ public class HashManager : IDisposable
     /// </summary>
     public void Dispose()
     {
-        hashStrategy.Dispose();
+        Dispose(true);
         GC.SuppressFinalize(this);
+    }
+
+    /// <summary>
+    /// Releases all resources used by the current instance of the <see cref="HashManager"/> class.
+    /// </summary>
+    protected virtual void Dispose(bool disposing)
+    {
+        hashStrategy.Dispose();
+    }
+
+    ~HashManager()
+    {
+        Dispose(false);
     }
 }

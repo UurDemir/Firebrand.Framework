@@ -9,7 +9,7 @@ public abstract class EFAuditEntityTypeConfiguration<TEntity> : BaseAuditEntityT
     /// <summary>
     /// The default schema name for the entity.
     /// </summary>
-    protected virtual string Schema => "dbo";
+    protected virtual string Schema => SqlServerConstants.Schema;
 
     /// <summary>
     /// Whether the entity is temporal or not.

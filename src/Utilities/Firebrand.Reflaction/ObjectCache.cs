@@ -5,7 +5,7 @@
 /// </summary>
 public static class ObjectCache
 {
-    private static readonly Dictionary<Type, object> cache = new();
+    private static readonly Dictionary<Type, object> cache = [];
 
     /// <summary>
     /// Retrieves an instance of the specified type from the cache, or creates a new instance and adds it to the cache.

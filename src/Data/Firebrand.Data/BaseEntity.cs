@@ -4,7 +4,7 @@ public abstract class BaseEntity
 {
     public EntityStatus Status { get; set; }
 
-    public BaseEntity()
+    protected BaseEntity()
     {
         Status = EntityStatus.Active;
     }

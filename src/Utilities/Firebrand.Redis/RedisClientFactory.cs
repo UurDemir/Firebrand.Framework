@@ -12,23 +12,22 @@ namespace Firebrand.Redis;
 /// </summary>
 public class RedisClientFactory : IRedisClientFactory
 {
-    private readonly RedisConfiguration configuration;
     private readonly ConcurrentDictionary<string, Lazy<Task<RedisClient>>> clients;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RedisClientFactory"/> class using the specified configuration.
     /// </summary>
-    /// <param name="configuration">The Redis configuration.</param>
-    public RedisClientFactory(IOptions<RedisConfiguration> configuration)
+    /// <param name="configurationOption">The Redis configuration.</param>
+    public RedisClientFactory(IOptions<RedisConfiguration> configurationOption)
     {
-        if (configuration.Value is null || configuration.Value.Connections is null or { Count: 0 })
+        if (configurationOption.Value is null || configurationOption.Value.Connections is null or { Count: 0 })
             throw new RedisConfigurationNotFoundException();
 
-        this.configuration = configuration.Value;
+        RedisConfiguration configuration = configurationOption.Value;
 
-        clients = new ConcurrentDictionary<string, Lazy<Task<RedisClient>>>(this.configuration.Connections.Count, this.configuration.Connections.Count);
+        clients = new ConcurrentDictionary<string, Lazy<Task<RedisClient>>>(configuration.Connections.Count, configuration.Connections.Count);
 
-        foreach (var connection in this.configuration.Connections)
+        foreach (var connection in configuration.Connections)
         {
             var lazyClient = new Lazy<Task<RedisClient>>(async () =>
             {
@@ -62,5 +61,4 @@ public class RedisClientFactory : IRedisClientFactory
         var client = clients[clientName].Value.ConfigureAwait(false).GetAwaiter().GetResult();
         return client;
     }
-
 }
