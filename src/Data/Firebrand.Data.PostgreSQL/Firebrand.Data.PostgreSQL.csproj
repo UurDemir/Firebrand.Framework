@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net8.0</TargetFrameworks>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<Title>Firebrand.Data.PostgreSQL</Title>
+		<PackageVersion>0.0.1</PackageVersion>
+		<Authors>Uğur Demir</Authors>
+		<PackageReleaseNotes>Namespaces are fixed</PackageReleaseNotes>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\Data\Firebrand.Data\Firebrand.Data.csproj" />
+	</ItemGroup>
+
+
+
+	<ItemGroup Condition=" '$(TargetFramework)' == 'net8.0' ">
+		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.8" />
+	</ItemGroup>
+
+</Project>

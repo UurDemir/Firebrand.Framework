@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+
+	<PropertyGroup>
+		<TargetFrameworks>net8.0</TargetFrameworks>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<PackageVersion>0.0.1</PackageVersion>
+		<Title>Firebrand.Security.Cryptography</Title>
+		<Authors>Uğur Demir</Authors>
+		<PackageReleaseNotes>Async methods are added</PackageReleaseNotes>
+	</PropertyGroup>
+
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\Utilities\Firebrand.Reflaction\Firebrand.Reflaction.csproj" />
+	</ItemGroup>
+
+</Project>
